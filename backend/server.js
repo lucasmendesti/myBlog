@@ -10,8 +10,8 @@ app.use(cors())
 app.use(express.json()) //with this we dont need to keep using parse everytime
 app.use(posts)
 
-app.listen(PORT, ()=>{
-    connect.connectToServer()
+connect.connectToServer().then(() => {
+  app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
-    
-})
+  });
+});
