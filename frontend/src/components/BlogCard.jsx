@@ -8,7 +8,6 @@ const BlogCard = ({post}) => {
       month: 'short',
       day: 'numeric'
     })
-    let stringDate = date.toString()
 
   return (
     <Link to={`/readblog/${post._id}`}>
