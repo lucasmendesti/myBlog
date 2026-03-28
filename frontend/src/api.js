@@ -4,7 +4,13 @@ const URL = "http://localhost:3000"
 
 //posts
 export async function getPosts(){
-    const response = await axios.get(`${URL}/posts`)
+    const token = sessionStorage.getItem("token") 
+    
+    const response = await axios.get(`${URL}/posts`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 
     if (response.status === 200){
         return response.data
