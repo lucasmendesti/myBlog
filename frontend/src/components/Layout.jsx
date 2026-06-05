@@ -1,21 +1,22 @@
-import { useEffect } from "react";
 import Navbar from "./Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-  let user = sessionStorage.getItem("token");
+  /*let token = sessionStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user) {
+    if (!token) {
       navigate("/");
     }
-  }, [user]);
-
+  }, [token, navigate]);
+*/
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans antialiased">
       <Navbar />
-      <Outlet />
-    </>
+        <main className="max-w-5xl w-full mx-auto px-4 py-10 flex-grow">
+          <Outlet />
+        </main>
+    </div>
   );
 };
 

@@ -50,6 +50,7 @@ userRoutes.route("/users").post(async (request, response) => {
       password: hash,
       joinDate: new Date(),
       posts: [],
+      role: request.body.role,
     };
     let data = await db.collection("users").insertOne(mongoObject);
     response.json(data);
@@ -66,6 +67,7 @@ userRoutes.route("/users/:id").put(async (request, response) => {
       password: request.body.password,
       joinDate: request.body.joinDate,
       posts: request.body.posts,
+      role: request.body.role
     },
   };
   let data = await db
@@ -91,8 +93,9 @@ userRoutes.route("/users/login").post(async (request, response) => {
 if(user){
     let confirmation = await bcrypt.compare(request.body.password, user.password)    
     if (confirmation){
+      const userRole = user.role || "user";
       const token = jwt.sign(user, process.env.SECRETKEY, {expiresIn: "1h"})
-        response.json({success: true, token})
+        response.json({success: true, token, role: user.role})
     } else {
         response.json({success: false, message: "Incorrect password"})
     }

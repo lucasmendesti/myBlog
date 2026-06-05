@@ -7,7 +7,7 @@ require("dotenv").config({ path: "./config.env" });
 let postRoutes = express.Router()
 
 //1 - Retrieve All
-postRoutes.route("/posts").get(verifyToken, async(request, response) => {
+postRoutes.route("/posts").get( async(request, response) => {
     let db = database.getDB()
     let data = await db.collection("posts").find({}).toArray()
     if (data.length > 0){
